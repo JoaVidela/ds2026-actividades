@@ -1,0 +1,30 @@
+
+body {
+    font-family: "-apple-system", "BlinkMacSystemFont", "SF Pro Display", sans-serif;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+    background-color: #EDE8D0;
+    color: #1d1d1f; 
+}
+h1, h2, h3 {
+    line-height: 1.2;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+div {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 15px 30px;
+}
+p {
+    font-size: 16px;
+    color: #333333;
+}
+.titulo-seleccionado {
+    color: #000000;
+    border-bottom: 2px solid #0055aa;
+    display: inline-block;
+    padding-bottom: 5px;
+}
