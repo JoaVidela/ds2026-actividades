@@ -55,6 +55,7 @@ body {
     background-color: var(--color-texto);
     padding: 15px;
     border-radius: 10px;
+    font-family: "-apple-system", "BlinkMacSystemFont", "SF Pro Display", sans-serif;
 }
 
 .navbar a {
