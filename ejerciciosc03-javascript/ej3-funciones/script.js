@@ -26,4 +26,4 @@ console.log(`Monto: $250 | Pago: D | Final: $${calcularPrecioFinal(250, "D")}`);
 console.log(`Monto: $350 | Pago: C | Final: $${calcularPrecioFinal(350, "C")}`);    //315
 console.log(`Monto: $500 | Pago: E | Final: $${calcularPrecioFinal(500, "E")}`);        //300
 console.log(`Monto: $450 | Pago: D | Final: $${calcularPrecioFinal(450, "D")}`);        //270
-console.log(`Monto: $300 | Pago: C | Final: $${calcularPrecioFinal(300, "C")}`);    //180
+console.log(`Monto: $300 | Pago: C | Final: $${calcularPrecioFinal(300, "C")}`);    //270
