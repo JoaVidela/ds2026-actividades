@@ -1,0 +1,159 @@
+
+body {
+    font-family: "-apple-system", "BlinkMacSystemFont", "SF Pro Display", sans-serif;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+    background-color: #EDE8D0;
+    color: #1d1d1f; 
+}
+h1, h2, h3 {
+    line-height: 1.2;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+div {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 15px 30px;
+}
+p {
+    font-size: 16px;
+    color: #333333;
+}
+.titulo-seleccionado {
+    color: #000000;
+    border-bottom: 2px solid #0055aa;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+:root {
+    --color-fondo: #EDE8D0;
+    --color-texto: #1d1d1f;
+    --color-primario: #0055aa;
+    --fuente-apple: "-apple-system", "SF Pro Display", sans-serif;
+    --espaciado-base: 20px;
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-apple);
+    padding: var(--espaciado-base);
+}
+
+.titulo-seleccionado{
+    color: var(--color-primario);
+}
+
+/* Navegación (Layout con Flexbox) */
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--color-texto);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Efectos */
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out; /* Suavizado de animaciones */
+}
+
+.navbar a:hover {
+    color: var(--color-primario);
+    background-color: white;
+    border-radius: 5px;
+}
+
+.navbar a.active {
+    transform: scale(0.95);
+}
+
+img{
+    transition: transform 0.3s ease;
+    filter: grayscale(100%);
+}
+
+img:hover {
+    transform: scale(1.05); 
+    filter: grayscale(0%); /* Efecto Visual al pasar el cursor por encima */
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: var(--fuente-apple);
+}
+
+button {
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--fuente-apple);
+    transition: background-color 0.3s ease;
+}
+
+/* Diseño Responsive (Media Queries) */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column; /* Cambio a columna para celulares */
+        gap: 15px;
+        text-align: center;
+        margin-left: 0;
+    }
+    body {
+        padding: 0 10px;
+    }
+    input, textarea, button {
+        font-family: var(--fuente-apple);
+        font-size: 16px;
+        max-width: 100%;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        display: block;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    input, textarea {
+        width: 100%;
+        max-width: 100%; /* El formulario ocupa todo el ancho del disponible */
+        padding: 12px;
+        background-color: white;
+    }
+    button{
+        background-color: var(--color-primario);
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s; transform: 0.2s;
+    }
+    button:hover {
+        background-color: #004488;
+    }
+    button:active{
+        transform: scale(0.98);
+    }
+    .titulo-seleccionado{
+        display: block;
+        text-align: center;
+    }
+    input:focus, textarea:focus {
+        outline: none;
+        border: 2px solid var(--color-primario);
+        box-shadow: 0 0 5px rgba(0, 85, 170, 0.3);
+    }  
+}
