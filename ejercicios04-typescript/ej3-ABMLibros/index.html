@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Catálogo de Libros (Clase 04)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 30px; line-height: 1.6; }
+        .controles { background: #f4f4f4; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        input { padding: 8px; width: 250px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 15px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; transition: 0.3s; }
+        button:hover { background-color: #0056b3; }
+        #btnVerTodos { background-color: #6c757d; }
+        #btnDisponibles { background-color: #28a745; }
+        
+        .stats { margin-top: 15px; font-weight: bold; font-size: 1.1em; color: #333; }
+        ul { list-style-type: none; padding: 0; }
+        li { padding: 10px; border-bottom: 1px solid #ddd; background: #fff; }
+        li:hover { background: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+    <h1>Gestión de Catálogo de Libros (UTN - Clase 04)</h1>
+
+    <div class="controles">
+    <input type="text" id="inputBusqueda" placeholder="Nombre del autor...">
+    <button id="btnFiltrar">Filtrar por Autor</button>
+    <button id="btnDisponibles">Solo disponibles</button>
+    <button id="btnVerTodos">Ver todos</button>
+</div>
+
+<div class="controles" style="background: #e9ecef; border: 1px solid #ced4da; padding: 15px; margin-top: 10px;">
+    <h3>Cargar Nuevo Libro</h3>
+    <input type="text" id="nuevoIsbn" placeholder="ISBN (ej: 444)">
+    <input type="text" id="nuevoTitulo" placeholder="Título">
+    <input type="text" id="nuevoAutor" placeholder="Autor">
+    <input type="number" id="nuevoPrecio" placeholder="Precio">
+    <button id="btnAgregar" type="button" style="background-color: #f39c12; color: white;">Guardar Libro</button>
+</div>
+
+<div class="stats" id="txtPromedio">Cargando estadísticas...</div>
+
+<ul id="resultadoLibros">
+    </ul>
+
+    <script src="app.js"></script>
+</body>
+</html>
