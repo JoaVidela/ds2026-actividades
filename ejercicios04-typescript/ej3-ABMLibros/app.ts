@@ -19,11 +19,11 @@ const btnDisponibles = document.getElementById('btnDisponibles') as HTMLButtonEl
 const btnVerTodos = document.getElementById('btnVerTodos') as HTMLButtonElement;
 const listado = document.getElementById('resultadoLibros') as HTMLElement;
 const txtPromedio = document.getElementById('txtPromedio') as HTMLElement;
-const inputIsbn = document.getElementById('nuevoIsbn') as HTMLInputElement;
 const inputTitulo = document.getElementById('nuevoTitulo') as HTMLInputElement;
 const inputAutor = document.getElementById('nuevoAutor') as HTMLInputElement;
 const inputPrecio = document.getElementById('nuevoPrecio') as HTMLInputElement;
 const btnAgregar = document.getElementById('btnAgregar') as HTMLButtonElement;
+const inputDisponible = document.getElementById('nuevoDisponible') as HTMLInputElement;
 
 function eliminarLibros (isbn: string): void {
     const indice = catalogo.findIndex(l => l.isbn === isbn);
@@ -34,7 +34,7 @@ function eliminarLibros (isbn: string): void {
 }
 
 function validarFormulario(): Libro | null {
-    let resultado: Libro | null = null; // Empezamos asumiendo que falla
+    let resultado: Libro | null = null; 
     const precio = parseFloat(inputPrecio.value);
     if (inputTitulo.value.trim() !== "" && precio > 0) {
         resultado = {
@@ -42,7 +42,7 @@ function validarFormulario(): Libro | null {
             titulo: inputTitulo.value,
             autor: inputAutor.value,
             precio: precio,
-            disponible: true
+            disponible: inputDisponible.checked
         };
     }
     return resultado; 
@@ -66,35 +66,32 @@ function renderizar(libros: Libro[]): void {
     listado.innerHTML = "";
     libros.forEach(l => {
         const li = document.createElement('li');
-        const estado = l.disponible ? "" : " [Sin Stock]";    
-        li.innerHTML = `
-            <span><strong>${l.titulo}</strong> - ${l.autor} ($${l.precio})${estado}</span>
-            <button class="btn-delete" style="margin-left: 15px; background-color: #e74c3c; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
-                Eliminar
-            </button>
-        `;
-        if (!l.disponible) {
-            li.style.color = "red";
-        }
-        const btnEliminar = li.querySelector('.btn-delete') as HTMLButtonElement;
-        btnEliminar.onclick = () => {
-            eliminarLibros(l.isbn);
-        };
-
+        const btnEliminar = document.createElement('button') as HTMLButtonElement;
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.style.marginLeft = "20px";
+        btnEliminar.style.backgroundColor = "red";
+        btnEliminar.style.color = "white";
+        btnEliminar.style.border = "none";
+        btnEliminar.style.padding = "4px 8px";
+        li.textContent = `ISBN: ${l.isbn} | Título: ${l.titulo} | Autor: ${l.autor} | Precio: $${l.precio} | Disponible: ${l.disponible ? "Sí" : "No"}`;
+        li.appendChild(btnEliminar);
         listado.appendChild(li);
+        btnEliminar.addEventListener('click', function() {
+            eliminarLibros(l.isbn);             
+      });
     });
-    const prom = calcularPromedio(libros);
-    txtPromedio.textContent = `Mostrando: ${libros.length} | Promedio: $${prom.toFixed(2)}`;
+    const promedio = calcularPromedio(libros);
+    txtPromedio.textContent = `Precio promedio: $${promedio.toFixed(2)}`;
 }
 
 btnAgregar.addEventListener('click', () => {
     const nuevoLibro = validarFormulario();
     if (nuevoLibro) {
     catalogo.push(nuevoLibro);
-    inputIsbn.value = "";
     inputTitulo.value = "";
     inputAutor.value = "";
     inputPrecio.value = "";
+    inputDisponible.checked = false;
     renderizar(catalogo);
     }
 });

@@ -10,11 +10,11 @@ const btnDisponibles = document.getElementById('btnDisponibles');
 const btnVerTodos = document.getElementById('btnVerTodos');
 const listado = document.getElementById('resultadoLibros');
 const txtPromedio = document.getElementById('txtPromedio');
-const inputIsbn = document.getElementById('nuevoIsbn');
 const inputTitulo = document.getElementById('nuevoTitulo');
 const inputAutor = document.getElementById('nuevoAutor');
 const inputPrecio = document.getElementById('nuevoPrecio');
 const btnAgregar = document.getElementById('btnAgregar');
+const inputDisponible = document.getElementById('nuevoDisponible');
 function eliminarLibros(isbn) {
     const indice = catalogo.findIndex(l => l.isbn === isbn);
     if (indice !== -1) {
@@ -23,7 +23,7 @@ function eliminarLibros(isbn) {
     }
 }
 function validarFormulario() {
-    let resultado = null; // Empezamos asumiendo que falla
+    let resultado = null;
     const precio = parseFloat(inputPrecio.value);
     if (inputTitulo.value.trim() !== "" && precio > 0) {
         resultado = {
@@ -31,7 +31,7 @@ function validarFormulario() {
             titulo: inputTitulo.value,
             autor: inputAutor.value,
             precio: precio,
-            disponible: true
+            disponible: inputDisponible.checked
         };
     }
     return resultado;
@@ -52,33 +52,31 @@ function renderizar(libros) {
     listado.innerHTML = "";
     libros.forEach(l => {
         const li = document.createElement('li');
-        const estado = l.disponible ? "" : " [Sin Stock]";
-        li.innerHTML = `
-            <span><strong>${l.titulo}</strong> - ${l.autor} ($${l.precio})${estado}</span>
-            <button class="btn-delete" style="margin-left: 15px; background-color: #e74c3c; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
-                Eliminar
-            </button>
-        `;
-        if (!l.disponible) {
-            li.style.color = "red";
-        }
-        const btnEliminar = li.querySelector('.btn-delete');
-        btnEliminar.onclick = () => {
-            eliminarLibros(l.isbn);
-        };
+        const btnEliminar = document.createElement('button');
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.style.marginLeft = "20px";
+        btnEliminar.style.backgroundColor = "red";
+        btnEliminar.style.color = "white";
+        btnEliminar.style.border = "none";
+        btnEliminar.style.padding = "4px 8px";
+        li.textContent = `ISBN: ${l.isbn} | Título: ${l.titulo} | Autor: ${l.autor} | Precio: $${l.precio} | Disponible: ${l.disponible ? "Sí" : "No"}`;
+        li.appendChild(btnEliminar);
         listado.appendChild(li);
+        btnEliminar.addEventListener('click', function () {
+            eliminarLibros(l.isbn);
+        });
     });
-    const prom = calcularPromedio(libros);
-    txtPromedio.textContent = `Mostrando: ${libros.length} | Promedio: $${prom.toFixed(2)}`;
+    const promedio = calcularPromedio(libros);
+    txtPromedio.textContent = `Precio promedio: $${promedio.toFixed(2)}`;
 }
 btnAgregar.addEventListener('click', () => {
     const nuevoLibro = validarFormulario();
     if (nuevoLibro) {
         catalogo.push(nuevoLibro);
-        inputIsbn.value = "";
         inputTitulo.value = "";
         inputAutor.value = "";
         inputPrecio.value = "";
+        inputDisponible.checked = false;
         renderizar(catalogo);
     }
 });
