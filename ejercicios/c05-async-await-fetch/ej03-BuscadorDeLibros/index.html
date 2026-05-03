@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3: Buscador de Libros (Open Library)</title>
+</head>
+<style>
+    body {
+        font-family: "-apple-system", "BlinkMacSystemFont", "SF Pro Display", sans-serif;
+        margin: 20px;
+    }
+    #mensajeEstado {
+        margin-bottom: 20px;
+    }
+</style>
+<body>
+    <h1>Ejercicio 3: Buscador de Libros (Open Library)</h1>
+    <div class ="busqueda">
+        <input type="text" id="inputBusqueda" placeholder="Ingresa el título del libro...">
+        <button id="botonBuscar">Buscar</button>
+    </div>
+    <div id="mensajeEstado" style="margin-bottom: 10px 0; font-weight: bold;"></div>
+    <div id="resultados" style="display: flex; flex-wrap: wrap; gap: 20px;" ></div>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
