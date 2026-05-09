@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libreria UTN - Home</title>
+    <title>Detalle del Libro - Librería UTN</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -12,9 +12,9 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
                 <i class="bi bi-book-half me-2" style="font-size: 2rem; color: #0d6efd;"></i>
-                 <span class="fs-4">Librería UTN</span>
+                <span class="fs-4">Librería UTN</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -28,41 +28,37 @@
                         <a class="nav-link" href="catalogo.html">Catálogo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="libro.html">Libro</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="contacto.html">Contacto</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <main class="container mt-5">
+
+    <main class="container mt-5 mb-5">
         <div class="row align-items-center">
-    <div class="col-md-5 mb-4 mb-md-0">
-        <div class="card shadow">
-            <img src="img/comerrezaramar.webp"
-                 class="img-fluid rounded" alt="Portada Comer Rezar Amar">
+            <div class="col-md-5 mb-4">
+                <div class="card shadow border-0">
+                    <img id="libro-portada" src="https://via.placeholder.com/400x600?text=Buscando+Portada" class="img-fluid rounded" alt="Portada">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <h1 id="libro-titulo" class="display-4 fw-bold">Cargando...</h1>
+                <p id="libro-autor" class="text-muted fs-3">Buscando autor...</p>
+                <hr>
+                
+                <p id="libro-descripcion" class="lead text-secondary"></p>
+
+                <h2 class="text-primary my-4" id="libro-precio">$ ---</h2>
+
+                <div class="d-flex gap-2">
+                    <button class="btn btn-success btn-lg px-4">Comprar</button>
+                    <a href="catalogo.html" class="btn btn-outline-secondary btn-lg">Volver al catálogo</a>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-7">
-        <h1 class="display-4 fw-bold">Comer Rezar Amar</h1>
-        <p class="text-muted fs-3">Elizabeth Gilbert</p>
-        <hr>
-        <p class="lead">
-            Tras un divorcio traumático y una desilusión amorosa, la autora decide encontrarse a sí misma a través de un viaje de un año: el placer en Italia, la devoción en la India y el equilibrio entre ambos en Bali.
-        </p>
-        <h2 class="text-primary my-4">$22.900</h2>
-        <div class="d-flex gap-2">
-            <button class="btn btn-success btn-lg px-4">Comprar</button>
-            <a href="catalogo.html" class="btn btn-outline-secondary btn-lg">Volver al catálogo</a> 
-        </div>
-    </div>
-</div>
-    </div>
-</main>
-    <div class ="container mt-5">
-    </div>
+    </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/data.js"></script>
 </body>
