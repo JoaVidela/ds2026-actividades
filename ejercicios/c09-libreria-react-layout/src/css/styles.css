@@ -1,0 +1,51 @@
+:root {
+    --color-primario: hsl(238, 60%, 15%);
+    --color-primario-light-medium: hsl(238, 60%, 20%);
+    --color-primario-light: hsl(238, 60%, 30%);
+    --color-secundario: hsl(238, 100%, 65%);
+    --color-secundario-black: hsl(238, 100%, 55%);
+    --color-secundario-light: hsl(238, 100%, 75%);
+
+    --color-interface: rgba(255, 255, 255, 85%);
+    --color-bold: hsl(255, 100%, 60%);
+
+    --font-interface: "Computer Modern", Inter, sans-serif;
+    --font-main: "Jetbrains Mono", Inter, sans-serif;
+    --font-code: "Courier New", Courier, monospace;
+}
+
+main strong {
+    color: var(--color-bold);
+}
+
+h1 {
+    color: var(--color-secundario);
+    font-family: var(--font-main);
+    font-weight: bold;
+    text-shadow: var(--color-secundario-light) 2px 2px 1px;
+}
+
+h2, h3, h4, h5 {
+    color: var(--color-secundario);
+    font-family: var(--font-main);
+    font-weight: bold;
+    text-shadow: rgba(0, 0, 0, 100%) 3px 3px 10px;
+}
+
+body {
+    background-color: var(--color-primario-light);
+}
+
+header {
+    background-color: var(--color-primario-light);
+    border-bottom: 2px solid var(--color-secundario);
+}
+
+.hero-bg-img {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                linear-gradient(135deg, var(--color-primario) 0%, var(--color-primario-light) 100%);
+    background-size: cover;
+    background-position: center center;
+    min-height: 500px;
+    border-radius: 15px;
+}
