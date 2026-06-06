@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './Header.css';
 
-function HeaderLibreria() {
+function Header() {
   return (
     <Navbar expand="lg" className="custom-navbar py-3">
       <Container fluid className="px-4">
@@ -22,4 +22,4 @@ function HeaderLibreria() {
   );
 }
 
-export default HeaderLibreria;
+export default Header;

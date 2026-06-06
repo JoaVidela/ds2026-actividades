@@ -1,7 +1,5 @@
-import HeaderLibreria from '../components/HeaderLibreria';
 import Hero from '../components/Hero';
 import CardLibro from '../components/CardLibro';
-import Footer from '../components/Footer';
 import Row from 'react-bootstrap/Row';
 import type { Libro } from '../types/libro';
 
@@ -53,30 +51,22 @@ const libros: Libro[] = [
 function Home() {
   return (
     <>
-      <header>
-        <HeaderLibreria />
-      </header>
+      <Hero />
 
-      <main>
-        <Hero />
-
-        <section className="container my-5">
-          <h1 className="text-center mb-5">Libros Destacados</h1>
-          <Row className="g-4">
-            {libros.map((libro) => (
-              <CardLibro
-                key={libro.id}
-                titulo={libro.titulo}
-                autor={libro.autor}
-                precio={libro.precio}
-                imgSrc={libro.imgSrc}
-              />
-            ))}
-          </Row>
-        </section>
-      </main>
-
-      <Footer />
+      <section className="container my-5">
+        <h1 className="text-center mb-5">Libros Destacados</h1>
+        <Row className="g-4">
+          {libros.map((libro) => (
+            <CardLibro
+              key={libro.id}
+              titulo={libro.titulo}
+              autor={libro.autor}
+              precio={libro.precio}
+              imgSrc={libro.imgSrc}
+            />
+          ))}
+        </Row>
+      </section>
     </>
   );
 }
