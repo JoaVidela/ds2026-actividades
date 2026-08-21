@@ -1,0 +1,100 @@
+@baseUrl = http://localhost:3000
+
+### Listar libros -> 200
+GET {{baseUrl}}/api/libros
+
+### Solo los libros disponibles -> 200
+GET {{baseUrl}}/api/libros?disponible=true
+
+### Solo los libros no disponibles -> 200
+GET {{baseUrl}}/api/libros?disponible=false
+
+### Ver un libro -> 200
+GET {{baseUrl}}/api/libros/1
+
+### Ver un libro que no existe -> 404
+GET {{baseUrl}}/api/libros/999
+
+### Crear un libro -> 201
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Ficciones",
+  "autor": "Jorge Luis Borges",
+  "precio": 21000,
+  "imgSrc": "https://placehold.co/300x400?text=Ficciones",
+  "disponible": true
+}
+
+### Editar un libro -> 200
+PUT {{baseUrl}}/api/libros/1
+Content-Type: application/json
+
+{
+  "titulo": "La Odisea",
+  "autor": "Homero",
+  "precio": 31000,
+  "imgSrc": "https://placehold.co/300x400?text=La+Odisea",
+  "disponible": true
+}
+
+### Editar un libro que no existe -> 404
+PUT {{baseUrl}}/api/libros/999
+Content-Type: application/json
+
+{
+  "titulo": "Fantasma",
+  "autor": "Nadie",
+  "precio": 1000,
+  "imgSrc": "https://placehold.co/300x400?text=Fantasma",
+  "disponible": false
+}
+
+### Borrar un libro -> 204
+DELETE {{baseUrl}}/api/libros/6
+
+### Borrar el mismo libro otra vez -> 404
+DELETE {{baseUrl}}/api/libros/6
+
+### Listar autores -> 200
+GET {{baseUrl}}/api/autores
+
+### Ver un autor -> 200
+GET {{baseUrl}}/api/autores/1
+
+### Ver un autor que no existe -> 404
+GET {{baseUrl}}/api/autores/999
+
+### Crear un autor -> 201
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "Jorge Luis Borges",
+  "nacionalidad": "Argentina"
+}
+
+### Editar un autor -> 200
+PUT {{baseUrl}}/api/autores/1
+Content-Type: application/json
+
+{
+  "nombre": "Homero",
+  "nacionalidad": "Griega antigua"
+}
+
+### Editar un autor que no existe -> 404
+PUT {{baseUrl}}/api/autores/999
+Content-Type: application/json
+
+{
+  "nombre": "Fantasma",
+  "nacionalidad": "Ninguna"
+}
+
+### Borrar un autor -> 204
+DELETE {{baseUrl}}/api/autores/3
+
+### Borrar el mismo autor otra vez -> 404
+DELETE {{baseUrl}}/api/autores/3
