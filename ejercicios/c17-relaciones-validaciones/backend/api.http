@@ -1,0 +1,181 @@
+@baseUrl = http://localhost:3000
+
+### Listar libros, cada uno con su autor -> 200
+GET {{baseUrl}}/api/libros
+
+### Solo los libros disponibles -> 200
+GET {{baseUrl}}/api/libros?disponible=true
+
+### Solo los libros no disponibles -> 200
+GET {{baseUrl}}/api/libros?disponible=false
+
+### Detalle de un libro, con autor y categorías -> 200
+GET {{baseUrl}}/api/libros/1
+
+### Crear un libro -> 201
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "El Aleph",
+  "precio": 22500,
+  "imgSrc": "https://placehold.co/300x400?text=El+Aleph",
+  "disponible": true,
+  "autorId": 7
+}
+
+### Editar solo el precio, el resto queda igual -> 200
+PUT {{baseUrl}}/api/libros/1
+Content-Type: application/json
+
+{
+  "precio": 31000
+}
+
+### Borrar el libro recién creado -> 204
+DELETE {{baseUrl}}/api/libros/11
+
+### Listar autores -> 200
+GET {{baseUrl}}/api/autores
+
+### Ver un autor -> 200
+GET {{baseUrl}}/api/autores/1
+
+### Crear un autor -> 201
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "Ernesto Sabato",
+  "nacionalidad": "Argentina"
+}
+
+### Editar un autor -> 200
+PUT {{baseUrl}}/api/autores/11
+Content-Type: application/json
+
+{
+  "nacionalidad": "Argentina"
+}
+
+### Borrar un autor que no tiene libros -> 204
+DELETE {{baseUrl}}/api/autores/11
+
+### Listar categorías -> 200
+GET {{baseUrl}}/api/categorias
+
+### Ver una categoría -> 200
+GET {{baseUrl}}/api/categorias/1
+
+### Crear una categoría -> 201
+POST {{baseUrl}}/api/categorias
+Content-Type: application/json
+
+{
+  "nombre": "Ensayo"
+}
+
+### Editar una categoría -> 200
+PUT {{baseUrl}}/api/categorias/5
+Content-Type: application/json
+
+{
+  "nombre": "Ensayo literario"
+}
+
+### Borrar una categoría -> 204
+DELETE {{baseUrl}}/api/categorias/5
+
+### 400 - libro sin título
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "precio": 5000,
+  "imgSrc": "https://placehold.co/300x400",
+  "autorId": 1
+}
+
+### 400 - precio negativo
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Te pago por leerlo",
+  "precio": -500,
+  "imgSrc": "https://placehold.co/300x400",
+  "autorId": 1
+}
+
+### 400 - id inválido, abc no es un número
+GET {{baseUrl}}/api/libros/abc
+
+### 400 - id negativo
+GET {{baseUrl}}/api/libros/-5
+
+### 400 - autor sin nombre
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nacionalidad": "Argentina"
+}
+
+### 400 - categoría con nombre vacío
+POST {{baseUrl}}/api/categorias
+Content-Type: application/json
+
+{
+  "nombre": "   "
+}
+
+### 404 - ver un libro que no existe
+GET {{baseUrl}}/api/libros/9999
+
+### 404 - editar un libro que no existe
+PUT {{baseUrl}}/api/libros/9999
+Content-Type: application/json
+
+{
+  "precio": 1000
+}
+
+### 404 - borrar un libro que no existe
+DELETE {{baseUrl}}/api/libros/9999
+
+### 404 - ver un autor que no existe
+GET {{baseUrl}}/api/autores/9999
+
+### 404 - ver una categoría que no existe
+GET {{baseUrl}}/api/categorias/9999
+
+### 409 - autor duplicado, nombre es @unique
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "Homero",
+  "nacionalidad": "Griega"
+}
+
+### 409 - categoría duplicada, nombre es @unique
+POST {{baseUrl}}/api/categorias
+Content-Type: application/json
+
+{
+  "nombre": "Novela"
+}
+
+### 409 - borrar un autor que tiene libros, onDelete Restrict
+DELETE {{baseUrl}}/api/autores/1
+
+### 409 - crear un libro con un autor que no existe
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Huérfano",
+  "precio": 5000,
+  "imgSrc": "https://placehold.co/300x400",
+  "autorId": 9999
+}
