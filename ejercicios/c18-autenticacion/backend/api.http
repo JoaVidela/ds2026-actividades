@@ -1,0 +1,265 @@
+@baseUrl = http://localhost:3000
+
+### 1. Registro -> 201, sin passwordHash en la respuesta
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{
+  "nombre": "Ana",
+  "email": "ana@libreria.test",
+  "password": "Libreria2026"
+}
+
+### 2. El mismo email otra vez -> 409
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{
+  "nombre": "Ana",
+  "email": "ana@libreria.test",
+  "password": "Libreria2026"
+}
+
+### 3. Password corta, sin mayúscula y sin número -> 400 con los 3 errores
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{
+  "nombre": "Pedro",
+  "email": "pedro@libreria.test",
+  "password": "corta"
+}
+
+### 4. Login con un mail que no existe -> 401 "Credenciales inválidas"
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "nadie@libreria.test",
+  "password": "Libreria2026"
+}
+
+### 5. Login con la contraseña mal -> 401, el mismo mensaje que el 4
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "cliente@libreria.test",
+  "password": "NoEsLaMia1"
+}
+
+### 6. Login correcto -> 200 con token
+# @name loginCliente
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "cliente@libreria.test",
+  "password": "Cliente1234"
+}
+
+### Guardamos el token del CLIENTE
+@tokenCliente = {{loginCliente.response.body.token}}
+
+### Login como ADMIN -> 200 con token
+# @name loginAdmin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@libreria.test",
+  "password": "Admin1234"
+}
+
+### Guardamos el token del ADMIN
+@tokenAdmin = {{loginAdmin.response.body.token}}
+
+### 7. Ver mis datos sin token -> 401
+GET {{baseUrl}}/api/auth/yo
+
+### 8. Ver mis datos como CLIENTE -> 200
+GET {{baseUrl}}/api/auth/yo
+Authorization: Bearer {{tokenCliente}}
+
+### 9. Crear un libro sin token -> 401
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "El Aleph",
+  "precio": 22500,
+  "imgSrc": "https://placehold.co/300x400?text=El+Aleph",
+  "autorId": 7
+}
+
+### 10. Crear un libro como CLIENTE -> 403
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{tokenCliente}}
+
+{
+  "titulo": "El Aleph",
+  "precio": 22500,
+  "imgSrc": "https://placehold.co/300x400?text=El+Aleph",
+  "autorId": 7
+}
+
+### 11. Crear un libro como ADMIN -> 201
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "titulo": "El Aleph",
+  "precio": 22500,
+  "imgSrc": "https://placehold.co/300x400?text=El+Aleph",
+  "autorId": 7
+}
+
+### 12. Listar libros sin token -> 200, el catálogo es público
+GET {{baseUrl}}/api/libros
+
+### Token adulterado -> 401 "Token inválido"
+GET {{baseUrl}}/api/auth/yo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTk5LCJyb2wiOiJBRE1JTiJ9.firma_que_no_corresponde
+
+### Solo los libros disponibles -> 200
+GET {{baseUrl}}/api/libros?disponible=true
+
+### Detalle de un libro, con autor y categorías -> 200
+GET {{baseUrl}}/api/libros/1
+
+### Editar un libro como ADMIN -> 200
+PUT {{baseUrl}}/api/libros/1
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "precio": 31000
+}
+
+### Borrar el libro creado en el caso 11, como ADMIN -> 204
+DELETE {{baseUrl}}/api/libros/11
+Authorization: Bearer {{tokenAdmin}}
+
+### Listar autores sin token -> 200
+GET {{baseUrl}}/api/autores
+
+### Crear un autor como CLIENTE -> 403
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+Authorization: Bearer {{tokenCliente}}
+
+{
+  "nombre": "Ernesto Sabato",
+  "nacionalidad": "Argentina"
+}
+
+### Crear un autor como ADMIN -> 201
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "nombre": "Ernesto Sabato",
+  "nacionalidad": "Argentina"
+}
+
+### Editar un autor como ADMIN -> 200
+PUT {{baseUrl}}/api/autores/11
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "nacionalidad": "Argentina"
+}
+
+### Borrar un autor sin libros, como ADMIN -> 204
+DELETE {{baseUrl}}/api/autores/11
+Authorization: Bearer {{tokenAdmin}}
+
+### Listar categorías sin token -> 200
+GET {{baseUrl}}/api/categorias
+
+### Crear una categoría como ADMIN -> 201
+POST {{baseUrl}}/api/categorias
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "nombre": "Ensayo"
+}
+
+### Editar una categoría como ADMIN -> 200
+PUT {{baseUrl}}/api/categorias/5
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "nombre": "Ensayo literario"
+}
+
+### Borrar una categoría como ADMIN -> 204
+DELETE {{baseUrl}}/api/categorias/5
+Authorization: Bearer {{tokenAdmin}}
+
+### 400 - libro sin título
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "precio": 5000,
+  "imgSrc": "https://placehold.co/300x400",
+  "autorId": 1
+}
+
+### 400 - precio negativo
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "titulo": "Te pago por leerlo",
+  "precio": -500,
+  "imgSrc": "https://placehold.co/300x400",
+  "autorId": 1
+}
+
+### 400 - id inválido, abc no es un número
+GET {{baseUrl}}/api/libros/abc
+
+### 400 - email inválido en el login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "no-es-un-mail",
+  "password": "Cliente1234"
+}
+
+### 404 - ver un libro que no existe
+GET {{baseUrl}}/api/libros/9999
+
+### 404 - editar un libro que no existe, como ADMIN
+PUT {{baseUrl}}/api/libros/9999
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "precio": 1000
+}
+
+### 409 - autor duplicado, nombre es @unique
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "nombre": "Homero",
+  "nacionalidad": "Griega"
+}
+
+### 409 - borrar un autor que tiene libros, onDelete Restrict
+DELETE {{baseUrl}}/api/autores/1
+Authorization: Bearer {{tokenAdmin}}
