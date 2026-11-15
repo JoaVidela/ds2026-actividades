@@ -32,6 +32,9 @@ function Header() {
           {tieneRol('ADMIN') && (
             <Nav.Link as={Link} to="/libros/nuevo" className="px-3">NUEVO LIBRO</Nav.Link>
           )}
+          {tieneRol('ADMIN') && (
+            <Nav.Link as={Link} to="/autores/nuevo" className="px-3">NUEVO AUTOR</Nav.Link>
+          )}
           <Nav.Link className="px-3">CONTACTO</Nav.Link>
           {usuario && <Navbar.Text className="px-3 text-white">Hola, {usuario.nombre}</Navbar.Text>}
           <Nav.Link onClick={manejarSesion} className="px-3">

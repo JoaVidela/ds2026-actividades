@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Catalogo from './pages/Catalogo';
 import LibroDetalle from './pages/LibroDetalle';
 import LibroNuevo from './pages/LibroNuevo';
+import AutorNuevo from './pages/AutorNuevo';
 import Login from './pages/Login';
 import SinPermiso from './pages/SinPermiso';
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/sin-permiso" element={<SinPermiso />} />
             <Route element={<PrivateRoute rol="ADMIN" />}>
               <Route path="/libros/nuevo" element={<LibroNuevo />} />
+              <Route path="/autores/nuevo" element={<AutorNuevo />} />
             </Route>
           </Routes>
         </Layout>
