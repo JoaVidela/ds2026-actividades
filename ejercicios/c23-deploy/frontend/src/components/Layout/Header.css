@@ -1,0 +1,29 @@
+:root {
+    --color-primario: hsl(238, 60%, 15%);
+    --color-secundario: hsl(238, 100%, 65%);
+    --color-secundario-light: hsl(238, 100%, 75%);
+    --color-interface: rgba(255, 255, 255, 85%);
+}
+
+.logo-svg {
+    filter: drop-shadow(2px 4px 6px rgba(255, 255, 255, 0.5));
+}
+
+.custom-logo {
+    text-shadow: 3px 3px 5px var(--color-secundario-light);
+}
+
+.custom-navbar {
+    background-color: var(--color-primario);
+}
+
+.custom-nav-links .nav-link {
+    color: var(--color-interface);
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.custom-nav-links .nav-link:hover {
+    background-color: var(--color-secundario);
+}
